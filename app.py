@@ -6,8 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
 
-
-    return render_template("index.html")
+    return '{"Response":200,"URL":{"login":"/login","create":"/craete"}}'
 @app.route('/login',methods=['POST','GET'])
 def login():
     if request.method=='POST':
@@ -17,10 +16,10 @@ def login():
        print(Password)
        testpass =  create.data_login(User,Password)
        if testpass:
-           return "<h1>OK</h1>"
+           return '{"Response":"ok","mode":"login"}'
        else :
-           return "<h1>error</h1>"
-    return render_template("login.html")
+           return '{"Response":"error","mode":"login"}'
+    return '{"Response":200}'
 
 
 
@@ -30,9 +29,9 @@ def createa():
        Password = request.form['password']
        User= request.form['email']
        create.data_create(User, Password)
-       return "<h1>OK CREATE</h1>"
+       return '{"Response":"ok","mode":"craete"}'
 
 
-    return render_template("create.html")
+    return '{"Response":200}'
 if __name__ == '__main__':
     app.run()
