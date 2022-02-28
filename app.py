@@ -15,7 +15,7 @@ def login():
        print(User)
        print(Password)
        testpass =  create.data_login(User,Password)
-       if testpass:
+       if testpass==True:
            return '{"Response":"ok","mode":"login"}'
        else :
            return '{"Response":"error","mode":"login"}'
@@ -28,9 +28,12 @@ def createa():
     if request.method=='POST':
        Password = request.form['password']
        User= request.form['email']
-       create.data_create(User, Password)
-       return '{"Response":"ok","mode":"craete"}'
-
+       datache=create.data_create(User, Password)
+       if datache==True:
+           return '{"Response":"ok","mode":"craete"}'
+       else : 
+           return '{"Response":"ok","mode":"This email has already been registered"}'
+    
 
     return '{"Response":200}'
 if __name__ == '__main__':

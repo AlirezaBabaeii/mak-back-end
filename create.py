@@ -1,4 +1,5 @@
 import sqlite3
+from tkinter.tix import Tree
 def data_create(email, password):
     data=sqlite3.connect('sis.db')
     data_t=data.cursor()
@@ -7,6 +8,7 @@ def data_create(email, password):
     try :
         if email in data_r[0]:
             print("ok")
+            return False
     except:
         data.execute(f"""
         INSERT INTO SAS (
@@ -20,6 +22,7 @@ def data_create(email, password):
         """)
         print("ok test")
         data.commit()
+        return True
     data.close()
 def data_login(email1,password):
     data = sqlite3.connect('sis.db')
