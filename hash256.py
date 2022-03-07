@@ -11,7 +11,7 @@ def hashlogin(user,password):
     sql.execute(f"INSERT INTO hash (timehash,hashlogin,user) VALUES ('{datatime.date()}','{hase.hexdigest()}','{user}')")
     sql.commit()
     sql.close()
-    hashlogin("virustest","111222")
+    return hase.hexdigest()
 def gethash(hash,user):
     sql=sqlite3.connect("sis.db")
     data_t=sql.cursor()
