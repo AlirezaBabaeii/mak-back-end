@@ -19,7 +19,7 @@ def login():
        if testpass==True:
            out=make_response('{"Response":"ok","mode":"login"}')
            out.set_cookie("id User",User)
-           hashes=hash256.hashlogin(User.Password)
+           hashes=hash256.hashlogin(User)
            out.set_cookie("hash",hashes)
            return out
        else :

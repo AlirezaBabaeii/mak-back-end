@@ -1,7 +1,7 @@
 import sqlite3
 import datetime
 import hashlib
-def hashlogin(user,password):
+def hashlogin(user):
     datatime = datetime.datetime.now()
     hase = hashlib.sha256()
     hase.update(b"test")
