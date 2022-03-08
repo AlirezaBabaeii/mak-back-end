@@ -1,5 +1,6 @@
-from flask import Flask , render_template ,request
+from flask import Flask , render_template ,request ,make_response
 import create
+import hash256
 
 app = Flask(__name__)
 
@@ -16,7 +17,11 @@ def login():
        print(Password)
        testpass =  create.data_login(User,Password)
        if testpass==True:
-           return '{"Response":"ok","mode":"login"}'
+           out=make_response('{"Response":"ok","mode":"login"}')
+           out.set_cookie("id User",User)
+           hashes=hash256.hashlogin(User)
+           out.set_cookie("hash",hashes)
+           return out
        else :
            return '{"Response":"error","mode":"login"}'
     return '{"Response":200}'
@@ -30,6 +35,7 @@ def createa():
        User= request.form['email']
        datache=create.data_create(User, Password)
        if datache==True:
+
            return '{"Response":"ok","mode":"craete"}'
        else : 
            return '{"Response":"ok","mode":"This email has already been registered"}'
