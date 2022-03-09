@@ -2,3 +2,4 @@
 venv/
 __pycache__/
 sis.db
+/python-virtual-environments
