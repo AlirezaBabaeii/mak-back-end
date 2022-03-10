@@ -1,22 +1,16 @@
-import sqlite3
 import datetime
 import hashlib
+import sql
 def hashlogin(user):
     datatime = datetime.datetime.now()
     hase = hashlib.sha256()
     hase.update(b"test")
     hase.update(b"abolfazl")
     hase.update(str(datatime.date()).encode())
-    sql = sqlite3.connect("sis.db")
-    sql.execute(f"INSERT INTO hash (timehash,hashlogin,user) VALUES ('{datatime.date()}','{hase.hexdigest()}','{user}')")
-    sql.commit()
-    sql.close()
+    sql.hashligondb(datatime.date(),hase.hexdigest(),user)
     return hase.hexdigest()
 def gethash(hash,user):
-    sql=sqlite3.connect("sis.db")
-    data_t=sql.cursor()
-    data_t.execute(f"SELECT user, hashlogin, timehash FROM hash WHERE user = '{user}'")
-    da=data_t.fetchall()
+    db=sql.hashgetdb(user)
     if da[0][1] in hash:
         print ("ok hash")
         data=datetime.datetime.now()
