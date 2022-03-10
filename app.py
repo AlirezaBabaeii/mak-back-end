@@ -1,4 +1,4 @@
-from flask import Flask , render_template ,request ,make_response
+from flask import Flask ,request ,make_response
 import hash256
 
 app = Flask(__name__)
