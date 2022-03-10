@@ -17,9 +17,7 @@ def hashlogin(user):
     hashligondb(datatime.date(),hase.hexdigest(),user)
     return hase.hexdigest()
 def gethash(hash,user):
-    data_t=mydb.cursor()
-    data_t.execute(f"SELECT user, hashlogin, timehash FROM hash WHERE user = '{user}'")
-    da=data_t.fetchall()
+    db=hashgetdb(user)
     if da[0][1] in hash:
         print ("ok hash")
         data=datetime.datetime.now()
