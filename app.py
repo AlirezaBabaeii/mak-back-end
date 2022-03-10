@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
 
-    return '{"Response":200,"URL":{"login":"/login","create":"/craete"}}'
+    return '{"Response":200,"URL":{"login":"/login","create":"/create"}}'
 @app.route('/login',methods=['POST','GET'])
 def login():
     if request.method=='POST':
