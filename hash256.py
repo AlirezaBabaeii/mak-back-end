@@ -1,23 +1,16 @@
-
 import datetime
 import hashlib
-import mysql.connector
-mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="1382",
- database="webali"
-)
+import sql
 def hashlogin(user):
     datatime = datetime.datetime.now()
     hase = hashlib.sha256()
     hase.update(b"test")
     hase.update(b"abolfazl")
     hase.update(str(datatime.date()).encode())
-    hashligondb(datatime.date(),hase.hexdigest(),user)
+    sql.hashligondb(datatime.date(),hase.hexdigest(),user)
     return hase.hexdigest()
 def gethash(hash,user):
-    db=hashgetdb(user)
+    db=sql.hashgetdb(user)
     if da[0][1] in hash:
         print ("ok hash")
         data=datetime.datetime.now()
