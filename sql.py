@@ -10,3 +10,8 @@ mydb = mysql.connector.connect(
 def  hashligondb(datetimedb,hashtodb,user):
     sql = mydb.cursor()
     sql.execute(f"INSERT INTO hashdb (hashtime,hashlogin,user) VALUES ('{datetimedb}','{hashtodb}','{user}')")
+def hashgetdb(user):
+    data_t=mydb.cursor()
+    data_t.execute(f"SELECT user, hashlogin, timehash FROM hash WHERE user = '{user}'")
+    db=data_t.fetchall()
+    return  db
