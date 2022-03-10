@@ -1,5 +1,7 @@
+USE webali;
 CREATE TABLE user
 (
     email text,
-    pass password
-)
+    pass text,
+
+);
