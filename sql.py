@@ -23,7 +23,7 @@ def hashgetdb(user):
 
 def data_create(email, password):
     data_t=mydb.cursor()
-    a = data_t.execute(f"SELECT email, password FROM SAS WHERE email = '{email}';")
+    a = data_t.execute(f"SELECT email, pass FROM user WHERE email = '{email}';")
     data_r=a.fetchall()
     try :
         if email in data_r[0]:
@@ -31,7 +31,7 @@ def data_create(email, password):
     except:
         data.execute(f"""
         INSERT INTO SAS (
-                        password,
+                        pass,
                         email
                     )
                     VALUES (
@@ -57,7 +57,7 @@ def data_create(email, password):
 
 def data_login(email1,password):
     data_t = mydb.cursor()
-    a = data_t.execute(f"SELECT email, password FROM SAS WHERE email = '{email1}';")
+    a = data_t.execute(f"SELECT email, pass FROM user WHERE email = '{email1}';")
     data_r = a.fetchall()
     if email1 in data_r[0]:
         print("ok")
