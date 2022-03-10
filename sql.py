@@ -46,8 +46,9 @@ def data_create(email, password):
 
 def data_login(email1,password):
     data_t = mydb.cursor()
-    data_t.execute(f"SELECT email FROM user WHERE email = '{email1}'")
+    data_t.execute(f"SELECT email,pass FROM user WHERE email = '{email1}'")
     data_r = data_t.fetchall()
+    print(data_r)
     if email1 in data_r[0]:
         print("ok")
         if password in data_r[0][1]:
@@ -58,5 +59,3 @@ def data_login(email1,password):
             print(data_r[0][1])
             print("error")
             return False
-
-data_create("abolfazl","pass")
