@@ -1,6 +1,6 @@
 from flask import Flask ,request ,make_response
 import hash256
-
+import sql
 app = Flask(__name__)
 
 @app.route('/')
@@ -14,7 +14,7 @@ def login():
        User= request.form['email']
        print(User)
        print(Password)
-       testpass =  create.data_login(User,Password)
+       testpass =  sql.data_login(User,Password)
        if testpass==True:
            out=make_response('{"Response":"ok","mode":"login"}')
            out.set_cookie("id User",User)
@@ -32,7 +32,7 @@ def createa():
     if request.method=='POST':
        Password = request.form['password']
        User= request.form['email']
-       datache=create.data_create(User, Password)
+       datache=sql.data_create(User, Password)
        if datache==True:
 
            return '{"Response":"ok","mode":"craete"}'
