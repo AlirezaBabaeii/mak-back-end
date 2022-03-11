@@ -38,8 +38,38 @@ def createa():
            return '{"Response":"ok","mode":"craete"}'
        else : 
            return '{"Response":"ok","mode":"This email has already been registered"}'
+    return '{"Response":200}'
+
+
+
+
+
+
+
+
+@app.route('/admin/create',methods=['POST','GET'])
+def admin_def():
+    dataadmin=request.json
+    if dataadmin['set']=="True": 
+        dataadmin=request.json
+        print(dataadmin['email'])
+        print(dataadmin['password'])
+        change_crate =  sql.admin_carate_db(str(dataadmin['email']),str(dataadmin['password']))
+        if change_crate == True :
+            return '{"Response":"ok","mode":"craete"}'
+        else:
+            return '{"Response":"ok","mode":"This email has already been registered"}'
+    else :
+        return '{"Response":200}'
     
 
-    return '{"Response":200}'
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
