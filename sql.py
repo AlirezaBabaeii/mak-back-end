@@ -59,3 +59,18 @@ def data_login(email1,password):
             print(data_r[0][1])
             print("error")
             return False
+
+
+def admin_carate_db(user,password):
+    data_db=mydb.cursor()
+    data_db.execute(f"SELECT user FROM admins WHERE user = '{user}';")
+    data_r=data_db.fetchall()
+    try :
+        if user in data_r[0][0]:
+          print("ok")
+          return False
+    except:
+        data_db=mydb.cursor()
+        data_db.execute(f"INSERT INTO admins(user,pass,hashs) VALUES ('{str(user)}','{str(password)}','NULL')")
+        mydb.commit()
+        return True
