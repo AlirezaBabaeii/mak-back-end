@@ -74,3 +74,33 @@ def admin_carate_db(user,password):
         data_db.execute(f"INSERT INTO admins(user,pass,hashs) VALUES ('{str(user)}','{str(password)}','NULL')")
         mydb.commit()
         return True
+
+
+
+
+
+
+
+
+
+
+
+def admin_login_db(user,password):
+    data_db=mydb.cursor()
+    data_db.execute(f"SELECT user,pass,hashs,hashtime FROM admins WHERE user='{str(user)}'")
+    data_r=data_db.fetchall()
+    print(data_r)
+    try:
+        if data_r==user:
+            print("ok user")
+            if data_r[0][1]==password :
+                hase=hash_admin_login(user,password)
+                datatime=datetime.datetime.now()
+                data_db.execute(f'UPDATE admins SET hashs="{hase}",hashtime="{datatime}" WHERE user="{user}"')
+                data_db.commit()
+                return True
+    except:
+        return False
+                
+                
+admin_login_db("virussi1srsis@gmail.com","test11")
