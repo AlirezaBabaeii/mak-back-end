@@ -65,6 +65,21 @@ def admin_def():
 def admin_login():
     data_admin_login=request.json
     if data_admin_login['set']=="True":
+        user=data_admin_login['email']
+        password=data_admin_login['password']
+        data_requset_fachin=sql.admin_login_db(user,password)
+        if data_requset_fachin!=False:
+            strings=f'"status":200,"email":"{user}"'
+            out=make_response(strings)
+            out.set_cookie("id user",user)
+            out.set_cookie("hash",data_requset_fachin)
+            out.set_cookie("admin","True")
+            return out
+            
+        else:
+            return "error"
+        
+        
         
 
 
