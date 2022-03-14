@@ -41,12 +41,6 @@ def createa():
     return '{"Response":200}'
 
 
-
-
-
-
-
-
 @app.route('/admin/create',methods=['POST','GET'])
 def admin_def():
     dataadmin=request.json
@@ -79,19 +73,6 @@ def admin_login():
         else:
             return "error"
         
-        
-        
-
-
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
