@@ -1,6 +1,6 @@
 from datetime import datetime
 import mysql.connector
-
+import hash256_admin
 mydb = mysql.connector.connect(
   host="localhost",
   user="root",
@@ -59,3 +59,44 @@ def data_login(email1,password):
             print(data_r[0][1])
             print("error")
             return False
+
+
+def admin_carate_db(user,password):
+    data_db=mydb.cursor()
+    data_db.execute(f"SELECT user FROM admins WHERE user = '{user}';")
+    data_r=data_db.fetchall()
+    try :
+        if user in data_r[0][0]:
+          print("ok")
+          return False
+    except:
+        data_db=mydb.cursor()
+        data_db.execute(f"INSERT INTO admins(user,pass,hashs) VALUES ('{str(user)}','{str(password)}','NULL')")
+        mydb.commit()
+        return True
+
+
+
+
+
+
+
+
+
+
+
+def admin_login_db(user,password):
+    data_db=mydb.cursor()
+    data_db.execute(f"SELECT user,pass,hashs,hashtime FROM admins WHERE user='{str(user)}'")
+    data_r=data_db.fetchall()
+    print(data_r)
+    if data_r[0][0]==user:
+        print("ok user")
+        if data_r[0][1]==password:
+            print("ook password")
+            hase=hash256_admin.hash_admin_login(user,password)
+            datatime=datetime.now()
+            data_db.execute(f'UPDATE admins SET hashs="{hase}",hashtime="{datatime}" WHERE user="{user}"')
+            mydb.commit()
+            return str(hase)
+          
