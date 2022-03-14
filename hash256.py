@@ -41,4 +41,4 @@ def hash_admin_login(user,password):
     hase.update(str(user+user).encode())
     hase.update(str(datatime.date()).encode())
     return hase.hexdigest()
-print(hash_admin_login("sisrsis@gmail.com","virus1122"))
+
