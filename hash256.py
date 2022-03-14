@@ -4,11 +4,17 @@ import sql
 def hashlogin(user):
     datatime = datetime.datetime.now()
     hase = hashlib.sha256()
-    hase.update(b"test")
-    hase.update(b"abolfazl")
+    hase.update(str(user).encode())
+    hase.update(str(user+user).encode())
     hase.update(str(datatime.date()).encode())
     sql.hashligondb(datatime.date(),hase.hexdigest(),user)
     return hase.hexdigest()
+
+
+
+
+
+
 def gethash(hash,user):
     db=sql.hashgetdb(user)
     if da[0][1] in hash:
@@ -23,3 +29,16 @@ def gethash(hash,user):
     else :
         print("error hash")
         return False
+    
+    
+    
+    
+def hash_admin_login(user,password):
+    datatime = datetime.datetime.now()
+    hase=hashlib.sha256()
+    hase.update(str(user).encode())
+    hase.update(str(password).encode())
+    hase.update(str(user+user).encode())
+    hase.update(str(datatime.date()).encode())
+    return hase.hexdigest()
+print(hash_admin_login("sisrsis@gmail.com","virus1122"))
